@@ -227,6 +227,9 @@
   "alerts": {
     "message": "Alerts"
   },
+  "allOfYour": {
+    "message": "All of your"
+  },
   "allowExternalExtensionTo": {
     "message": "Allow this external extension to:"
   },
@@ -266,6 +269,10 @@
   "approveAllTokensTitle": {
     "message": "Give permission to access all of your $1?",
     "description": "$1 is the symbol of the token for which the user is granting approval"
+  },
+  "revokeAllTokensTitle": {
+    "message": "Revoke permission to access all of your $1?",
+    "description": "$1 is the symbol of the token for which the user is revoking approval"
   },
   "approveAndInstall": {
     "message": "Approve & Install"

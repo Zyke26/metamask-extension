@@ -7,6 +7,7 @@ import {
   calcTokenAmount,
   getAssetDetails,
   getTokenAddressParam,
+  getTokenApprovedParam,
   getTokenValueParam,
 } from '../helpers/utils/token-util';
 import { hideLoadingIndication, showLoadingIndication } from '../store/actions';
@@ -65,7 +66,8 @@ export function useAssetDetails(tokenAddress, userAddress, transactionData) {
     tokenValue,
     toAddress,
     tokenAmount,
-    tokenId;
+    tokenId,
+    approved;
 
   if (currentAsset) {
     const {
@@ -87,6 +89,7 @@ export function useAssetDetails(tokenAddress, userAddress, transactionData) {
     if (assetStandard === ERC721 || assetStandard === ERC1155) {
       assetName = name;
       tokenId = getTokenValueParam(tokenData);
+      // approved = getTokenApprovedParam(tokenData);
     }
     if (assetStandard === ERC20) {
       userBalance = balance;
@@ -109,5 +112,6 @@ export function useAssetDetails(tokenAddress, userAddress, transactionData) {
     toAddress,
     tokenAmount,
     tokenId,
+    // approved,
   };
 }

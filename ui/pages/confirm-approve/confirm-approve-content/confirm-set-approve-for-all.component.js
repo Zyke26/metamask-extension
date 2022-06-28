@@ -184,7 +184,7 @@ export default class ConfirmApproveContent extends Component {
 
   renderERC721OrERC1155PermissionContent() {
     const { t } = this.context;
-    const { origin, toAddress, isContract, isSetApproveForAll } = this.props;
+    const { origin, toAddress, isContract } = this.props;
 
     const titleTokenDescription = this.getTitleTokenDescription();
 
@@ -201,7 +201,7 @@ export default class ConfirmApproveContent extends Component {
             {t('approvedAsset')}:
           </div>
           <div className="confirm-approve-content__medium-text">
-            {isSetApproveForAll ? `${t('allOfYour')} ` : null}
+            {t('allOfYour')}
             {titleTokenDescription}
           </div>
         </div>
@@ -300,13 +300,11 @@ export default class ConfirmApproveContent extends Component {
 
   renderDataContent() {
     const { t } = this.context;
-    const { data, isSetApproveForAll } = this.props;
+    const { data } = this.props;
     return (
       <div className="flex-column">
         <div className="confirm-approve-content__small-text">
-          {isSetApproveForAll
-            ? t('functionSetApprovalForAll')
-            : t('functionApprove')}
+          {t('functionSetApprovalForAll')}
         </div>
         <div className="confirm-approve-content__small-text confirm-approve-content__data__data-block">
           {data}
@@ -317,49 +315,8 @@ export default class ConfirmApproveContent extends Component {
 
   renderFullDetails() {
     const { t } = this.context;
-    const {
-      assetStandard,
-      showEditApprovalPermissionModal,
-      customTokenAmount,
-      tokenAmount,
-      decimals,
-      origin,
-      setCustomAmount,
-      tokenSymbol,
-      tokenBalance,
-    } = this.props;
-    if (assetStandard === ERC20) {
-      return (
-        <div className="confirm-approve-content__full-tx-content">
-          <div className="confirm-approve-content__permission">
-            {this.renderApproveContentCard({
-              symbol: <i className="fa fa-user-check" />,
-              title: t('permissionRequest'),
-              content: this.renderERC20PermissionContent(),
-              showEdit: true,
-              onEditClick: () =>
-                showEditApprovalPermissionModal({
-                  customTokenAmount,
-                  decimals,
-                  origin,
-                  setCustomAmount,
-                  tokenAmount,
-                  tokenSymbol,
-                  tokenBalance,
-                }),
-            })}
-          </div>
-          <div className="confirm-approve-content__data">
-            {this.renderApproveContentCard({
-              symbol: <i className="fa fa-file" />,
-              title: 'Data',
-              content: this.renderDataContent(),
-              noBorder: true,
-            })}
-          </div>
-        </div>
-      );
-    } else if (assetStandard === ERC721 || assetStandard === ERC1155) {
+    const { assetStandard } = this.props;
+    if (assetStandard === ERC721 || assetStandard === ERC1155) {
       return (
         <div className="confirm-approve-content__full-tx-content">
           <div className="confirm-approve-content__permission">
@@ -514,16 +471,12 @@ export default class ConfirmApproveContent extends Component {
 
   renderTitle() {
     const { t } = this.context;
-    const { isSetApproveForAll, setApproveForAllArg } = this.props;
+    const { setApproveForAllArg } = this.props;
     const titleTokenDescription = this.getTitleTokenDescription();
 
-    let title = t('allowSpendToken', [titleTokenDescription]);
-
-    if (isSetApproveForAll) {
-      title = t('approveAllTokensTitle', [titleTokenDescription]);
-      if (setApproveForAllArg === false) {
-        title = t('revokeAllTokensTitle', [titleTokenDescription]);
-      }
+    title = t('approveAllTokensTitle', [titleTokenDescription]);
+    if (setApproveForAllArg === false) {
+      title = t('revokeAllTokensTitle', [titleTokenDescription]);
     }
     return title;
   }
@@ -550,7 +503,6 @@ export default class ConfirmApproveContent extends Component {
       rpcPrefs,
       isContract,
       assetStandard,
-      isSetApproveForAll,
     } = this.props;
     const { showFullTxDetails } = this.state;
 
@@ -668,26 +620,6 @@ export default class ConfirmApproveContent extends Component {
             </Button>
           </Box>
         </Box>
-        {assetStandard === ERC20 ? (
-          <div className="confirm-approve-content__edit-submission-button-container">
-            <div
-              className="confirm-approve-content__medium-link-text cursor-pointer"
-              onClick={() =>
-                showEditApprovalPermissionModal({
-                  customTokenAmount,
-                  decimals,
-                  origin,
-                  setCustomAmount,
-                  tokenAmount,
-                  tokenSymbol,
-                  tokenBalance,
-                })
-              }
-            >
-              {t('editPermission')}
-            </div>
-          </div>
-        ) : null}
         <div className="confirm-approve-content__card-wrapper">
           {this.renderApproveContentCard({
             symbol: <i className="fa fa-tag" />,

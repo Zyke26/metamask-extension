@@ -338,6 +338,8 @@ export default class ConfirmTransactionBase extends Component {
     };
 
     const hasSimulationError = Boolean(txData.simulationFails);
+
+    console.log('hasSimulationError', hasSimulationError);
     const renderSimulationFailureWarning =
       hasSimulationError && !userAcknowledgedGasMissing;
     const networkName = NETWORK_TO_NAME_MAP[txData.chainId];
@@ -1054,7 +1056,18 @@ export default class ConfirmTransactionBase extends Component {
         functionType = t('contractInteraction');
       }
     }
-
+    console.log(
+      `renderSimulationFailureWarning ||
+!valid ||
+submitting ||
+hardwareWalletRequiresConnection ||
+(gasIsLoading && !gasFeeIsCustom)`,
+      renderSimulationFailureWarning,
+      !valid,
+      submitting,
+      hardwareWalletRequiresConnection,
+      gasIsLoading && !gasFeeIsCustom,
+    );
     return (
       <TransactionModalContextProvider>
         <ConfirmPageContainer
