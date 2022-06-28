@@ -57,6 +57,7 @@ export default function ConfirmApprove({
   ethTransactionTotal,
   fiatTransactionTotal,
   hexTransactionTotal,
+  isSetApproveForAll
 }) {
   const dispatch = useDispatch();
   const { txParams: { data: transactionData } = {} } = transaction;
@@ -162,6 +163,7 @@ export default function ConfirmApprove({
         contentComponent={
           <TransactionModalContextProvider>
             <ConfirmApproveContent
+              isSetApproveForAll={isSetApproveForAll}
               decimals={decimals}
               siteImage={siteImage}
               setCustomAmount={setCustomPermissionAmount}

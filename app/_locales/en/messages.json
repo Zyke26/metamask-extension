@@ -263,6 +263,10 @@
   "approve": {
     "message": "Approve spend limit"
   },
+  "approveAllTokensTitle": {
+    "message": "Give permission to access all of your $1?",
+    "description": "$1 is the symbol of the token for which the user is granting approval"
+  },
   "approveAndInstall": {
     "message": "Approve & Install"
   },
@@ -1283,6 +1287,9 @@
   },
   "functionApprove": {
     "message": "Function: Approve"
+  },
+  "functionSetApprovalForAll": {
+    "message": "Function: SetApprovalForAll"
   },
   "functionType": {
     "message": "Function Type"

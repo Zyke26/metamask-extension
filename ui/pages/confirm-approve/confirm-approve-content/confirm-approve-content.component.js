@@ -184,7 +184,7 @@ export default class ConfirmApproveContent extends Component {
 
   renderERC721OrERC1155PermissionContent() {
     const { t } = this.context;
-    const { origin, toAddress, isContract } = this.props;
+    const { origin, toAddress, isContract, isSetApproveForAll } = this.props;
 
     const titleTokenDescription = this.getTitleTokenDescription();
 
@@ -299,11 +299,13 @@ export default class ConfirmApproveContent extends Component {
 
   renderDataContent() {
     const { t } = this.context;
-    const { data } = this.props;
+    const { data, isSetApproveForAll } = this.props;
     return (
       <div className="flex-column">
         <div className="confirm-approve-content__small-text">
-          {t('functionApprove')}
+          {isSetApproveForAll
+            ? t('functionSetApprovalForAll')
+            : t('functionApprove')}
         </div>
         <div className="confirm-approve-content__small-text confirm-approve-content__data__data-block">
           {data}
@@ -531,6 +533,7 @@ export default class ConfirmApproveContent extends Component {
       rpcPrefs,
       isContract,
       assetStandard,
+      isSetApproveForAll,
     } = this.props;
     const { showFullTxDetails } = this.state;
 
@@ -575,7 +578,9 @@ export default class ConfirmApproveContent extends Component {
           </Box>
         </Box>
         <div className="confirm-approve-content__title">
-          {t('allowSpendToken', [titleTokenDescription])}
+          {isSetApproveForAll
+            ? t('approveAllTokensTitle', [titleTokenDescription])
+            : t('allowSpendToken', [titleTokenDescription])}
         </div>
         <div className="confirm-approve-content__description">
           {t('trustSiteApprovePermission', [
