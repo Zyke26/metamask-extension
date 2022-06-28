@@ -30,7 +30,7 @@ import GasDetailsItem from '../../../components/app/gas-details-item';
 import LedgerInstructionField from '../../../components/app/ledger-instruction-field';
 import { ERC1155, ERC20, ERC721 } from '../../../helpers/constants/common';
 
-export default class ConfirmApproveContent extends Component {
+export default class ConfirmSetApproveForAllContent extends Component {
   static contextTypes = {
     t: PropTypes.func,
   };
